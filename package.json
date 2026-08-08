@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon --exec \"npx tsx\" index.ts",
     "build": "tsc",
-   "start": "node dist/index.js"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,6 +20,7 @@
     "typescript": "^7.0.2"
   },
   "dependencies": {
-    "date-fns": "^4.4.0"
+    "date-fns": "^4.4.0",
+    "uuid": "^14.0.1"
   }
 }
