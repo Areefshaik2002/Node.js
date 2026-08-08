@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
+    "dev": "nodemon --exec \"npx tsx\" index.ts",
     "build": "tsc",
-    "start": "node dist/server.js"
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -14,12 +14,13 @@
   "type": "module",
   "devDependencies": {
     "@types/node": "^26.1.2",
+    "nodemon": "^3.1.14",
     "ts-node": "^10.9.2",
     "tsx": "^4.23.9",
     "typescript": "^7.0.2"
   },
   "dependencies": {
     "date-fns": "^4.4.0",
-    "nodemon": "^3.1.14"
+    "uuid": "^14.0.1"
   }
 }
