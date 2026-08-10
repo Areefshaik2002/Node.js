@@ -1,6 +1,8 @@
+/* Express.js */
 import express from 'express'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
+import logger from './middleware/logger.js'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
@@ -9,18 +11,22 @@ const app = express()
 const one = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.log('one')
     next()
-    // res.send('start!')
 }
 const two = (req: express.Request, res: express.Response, next: express.NextFunction) => {
     console.log('two')
     next()
-    // res.send('working!')
 }
 const three = (req: express.Request, res: express.Response) => {
     console.log('three')
     res.send('Finished!')
 }
 
+app.use(logger)
+/* middleware code */
+app.use(express.urlencoded({extended: false}))
+app.use(express.json())
+app.use(express.static(path.join(dirName, 'public')))
+/* middleware code end */
 app.get('/chain', [one, two, three])
 
 app.get('/', (req, res) => {
