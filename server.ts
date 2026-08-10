@@ -20,23 +20,64 @@ const server = http.createServer( async (req, res) => {
         case '.js':
             contentType = 'text/javascript'
             break
+        case '.json':
+            contentType = 'application/json'
+            break
+        case '.jpg':
+            contentType = 'image/jpeg'
+            break
+        case '.png':
+            contentType = 'image/png'
+            break
+        case '.txt':
+            contentType = 'text/plain'
+            break
         default:
             contentType = 'text/html'
     }
 
-    const filePath = path.join(dirName, 'views', req.url == '/' ? 'index.html' : req.url!+ '.html')
+    let filePath = contentType === 'text/html' && req.url === '/'
+        ? path.join(dirName, 'views', 'index.html')
+        : contentType === 'text/html' && req.url?.slice(-1) === '/'
+        ? path.join(dirName, 'views', req.url, 'index.html')
+        : contentType === 'text/html'
+        ? path.join(dirName, 'views', req.url ?? '')
+        : path.join(dirName, req.url ?? '')
 
-    try {
-        const data = await fsPromise.readFile(filePath)
-        res.writeHead(200, {'content-type': contentType})
-        res.end(data)
-    } catch {
-        res.writeHead(404, {'content-type': 'text/html'})
-        const notFound = await fsPromise.readFile(path.join(dirName, 'views', '404.html'))
-        res.end(notFound)
-
+    if (!extension && req.url?.slice(-1) !== '/') {
+        filePath += '.html'
     }
 
+    const fileExists = fs.existsSync(filePath)
+    
+    const serveFile = async (filePath: string, contentType: string, res: http.ServerResponse) => {
+        try {
+            const data = await fsPromise.readFile(filePath)
+            res.writeHead(200, { 'Content-Type': contentType })
+            res.end(data)
+        } catch (err) {
+            console.error(err)
+            res.statusCode = 500
+            res.end()
+        }
+    }
+
+    if (fileExists) {
+        serveFile(filePath, contentType, res)
+    } else {
+        switch (path.parse(filePath).base) {
+            case 'old-page.html':
+                res.writeHead(301, { 'Location': '/new-page.html' })
+                res.end()
+                break
+            case 'www-page.html':
+                res.writeHead(301, { 'Location': '/' })
+                res.end()
+                break
+            default:
+                serveFile(path.join(dirName, 'views', '404.html'), 'text/html', res)
+        }
+    }
     // console.log(req.method, req.url)
     // res.writeHead(200, {'content-type':'text/plain'})
     // res.end("Hello world")
