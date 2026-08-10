@@ -1,3 +1,15 @@
+import express from 'express'
+import path from 'path'
+import { fileURLToPath } from 'url'
+
+const fileName = fileURLToPath(import.meta.url)
+const dirName = path.dirname(fileName)
+const PORT = process.env.port || 3500
+const app = express()
+app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
+
+/* Creating a web server - chapter 5
+
 import http from 'http'
 import path from 'path'
 import * as fsPromise from 'node:fs/promises'
@@ -86,3 +98,4 @@ const server = http.createServer( async (req, res) => {
 server.listen(PORT, () => {
     console.log(`server is running at port: ${PORT}`)
 })
+*/
