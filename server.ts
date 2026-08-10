@@ -3,6 +3,7 @@ import express from 'express'
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import logger from './middleware/logger.js'
+import morgan  from 'morgan'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
@@ -22,6 +23,7 @@ const three = (req: express.Request, res: express.Response) => {
 }
 
 app.use(logger)
+app.use(morgan('common'))
 /* middleware code */
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
