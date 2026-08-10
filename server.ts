@@ -1,11 +1,51 @@
 import express from 'express'
-import path from 'path'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
 const PORT = process.env.port || 3500
 const app = express()
+const one = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.log('one')
+    next()
+    // res.send('start!')
+}
+const two = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    console.log('two')
+    next()
+    // res.send('working!')
+}
+const three = (req: express.Request, res: express.Response) => {
+    console.log('three')
+    res.send('Finished!')
+}
+
+app.get('/chain', [one, two, three])
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(dirName, 'views', 'index.html'))
+})
+
+app.get('/new-page', (req, res) => {
+    res.sendFile(path.join(dirName, 'views', 'new-page.html'))
+})
+
+app.get('/old-page', (req, res) => {
+    res.redirect(301, '/new-page')
+})
+
+app.all('*splat', (req, res) => {
+    res.status(404).sendFile(path.join(dirName, 'views', '404.html'))
+})
+
+app.get('/hello', (req, res, next) => {
+    console.log('attempted to load hello')
+    next()
+}, (req, res) => {
+    res.send('Hello World')
+})
+
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
 
 /* Creating a web server - chapter 5
