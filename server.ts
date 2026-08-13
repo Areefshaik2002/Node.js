@@ -4,6 +4,8 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url'
 import logger from './middleware/logger.js'
 import morgan  from 'morgan'
+import rootRouter from './routes/root.js'
+import subdirRouter from './routes/subdir.js'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
@@ -29,29 +31,19 @@ app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(express.static(path.join(dirName, 'public')))
 /* middleware code end */
+app.use('/', rootRouter)
+app.use('/subdir', subdirRouter)
+
 app.get('/chain', [one, two, three])
-
-app.get('/', (req, res) => {
-    res.sendFile(path.join(dirName, 'views', 'index.html'))
-})
-
-app.get('/new-page', (req, res) => {
-    res.sendFile(path.join(dirName, 'views', 'new-page.html'))
-})
-
-app.get('/old-page', (req, res) => {
-    res.redirect(301, '/new-page')
-})
-
-app.all('*splat', (req, res) => {
-    res.status(404).sendFile(path.join(dirName, 'views', '404.html'))
-})
-
 app.get('/hello', (req, res, next) => {
     console.log('attempted to load hello')
     next()
 }, (req, res) => {
     res.send('Hello World')
+})
+
+app.all('*splat', (req, res) => {
+    res.status(404).sendFile(path.join(dirName, 'views', '404.html'))
 })
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`))
