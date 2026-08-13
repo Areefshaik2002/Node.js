@@ -6,6 +6,7 @@ import logger from './middleware/logger.js'
 import morgan  from 'morgan'
 import rootRouter from './routes/root.js'
 import subdirRouter from './routes/subdir.js'
+import employeesRouter from './routes/api/employees.js'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
@@ -33,6 +34,7 @@ app.use(express.static(path.join(dirName, 'public')))
 /* middleware code end */
 app.use('/', rootRouter)
 app.use('/subdir', subdirRouter)
+app.use('/employees', employeesRouter)
 
 app.get('/chain', [one, two, three])
 app.get('/hello', (req, res, next) => {
