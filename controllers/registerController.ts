@@ -14,7 +14,7 @@ export interface User {
 }
 
 // In-memory data store for users (initialized from users.json)
-const usersDB = {
+export const usersDB = {
     users: [] as User[],
     setUsers(data: User[]) {
         this.users = data

@@ -78,3 +78,7 @@
 2026/08/14 12:13:40 	uuid: d62e8741-320b-45f2-b9b5-f1b988bd2da8  	messsage: POST	/register
 2026/08/14 12:14:06 	uuid: 1d308367-45e6-485f-b37c-712d9bf123ac  	messsage: POST	/register
 2026/08/14 12:17:14 	uuid: fa5e4677-9a80-4bb4-86cb-f237c95b38a7  	messsage: POST	/register
+2026/08/14 12:28:12 	uuid: 168bbe65-90f2-4693-b64f-5ad704fce99f  	messsage: POST	/register
+2026/08/14 12:55:56 	uuid: 33d041b5-7968-4e56-9bbc-92a754e87b63  	messsage: POST	/auth
+2026/08/14 12:56:18 	uuid: eab41e18-66c3-48f8-8da7-d4feaf6e1d7e  	messsage: POST	/auth
+2026/08/14 12:56:21 	uuid: 53ffc52b-15c6-4740-bd7c-4857e0ccd03e  	messsage: POST	/auth
