@@ -7,6 +7,7 @@ import morgan  from 'morgan'
 import rootRouter from './routes/root.js'
 import subdirRouter from './routes/subdir.js'
 import employeesRouter from './routes/api/employees.js'
+import registerRouter from './routes/api/register.js'
 
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
@@ -35,6 +36,7 @@ app.use(express.static(path.join(dirName, 'public')))
 app.use('/', rootRouter)
 app.use('/subdir', subdirRouter)
 app.use('/employees', employeesRouter)
+app.use('/register', registerRouter)
 
 app.get('/chain', [one, two, three])
 app.get('/hello', (req, res, next) => {

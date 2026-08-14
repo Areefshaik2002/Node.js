@@ -74,3 +74,7 @@
 2026/08/13 15:55:16 	uuid: 23818c57-0975-4c02-adce-287d811b3172  	messsage: DELETE	/employees/4
 2026/08/13 15:55:26 	uuid: 25e0a81a-d5fb-4bb9-bcfe-3c8f6132e3f5  	messsage: DELETE	/employees
 2026/08/13 15:57:08 	uuid: e26594d8-33a5-4446-8787-5b31dbe04bb2  	messsage: DELETE	/employees
+2026/08/14 12:13:18 	uuid: 90cc2bb6-a431-434f-891b-783a0c677b08  	messsage: POST	/register
+2026/08/14 12:13:40 	uuid: d62e8741-320b-45f2-b9b5-f1b988bd2da8  	messsage: POST	/register
+2026/08/14 12:14:06 	uuid: 1d308367-45e6-485f-b37c-712d9bf123ac  	messsage: POST	/register
+2026/08/14 12:17:14 	uuid: fa5e4677-9a80-4bb4-86cb-f237c95b38a7  	messsage: POST	/register
