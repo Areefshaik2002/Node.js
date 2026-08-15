@@ -9,7 +9,13 @@ import subdirRouter from './routes/subdir.js'
 import employeesRouter from './routes/api/employees.js'
 import registerRouter from './routes/api/register.js'
 import authRouter from './routes/api/auth.js'
+import refreshRouter from './routes/api/refresh.js'
+import logoutRouter from './routes/api/logout.js'
+import dotenv from 'dotenv'
+import cookieParser from 'cookie-parser'
+import { verifyJWT } from './middleware/verifyJWT.js';
 
+dotenv.config()
 const fileName = fileURLToPath(import.meta.url)
 const dirName = path.dirname(fileName)
 const PORT = process.env.port || 3500
@@ -33,9 +39,14 @@ app.use(morgan('common'))
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(express.static(path.join(dirName, 'public')))
+app.use(cookieParser())
 /* middleware code end */
 app.use('/', rootRouter)
 app.use('/subdir', subdirRouter)
+app.use('/refresh', refreshRouter)
+app.use('/logout', logoutRouter)
+// Protected routes (JWT required)
+app.use('/employees', verifyJWT, employeesRouter);
 app.use('/employees', employeesRouter)
 app.use('/register', registerRouter)
 app.use('/auth', authRouter)

@@ -1,10 +1,11 @@
 [
   {
-    "username": "Dave",
-    "password": "$2b$10$czSvSjAqRft4EqFJkwfKJO1D7PyKhRdrnZUhECMer/4LYDsy8tbby"
-  },
-  {
     "username": "vikky singh",
     "password": "$2b$10$tfCMRYiTz7flsnJVmZXaJ.eajh62JTspsQH2dRozkv8z6MwTrsvI6"
+  },
+  {
+    "username": "Dave",
+    "password": "$2b$10$czSvSjAqRft4EqFJkwfKJO1D7PyKhRdrnZUhECMer/4LYDsy8tbby",
+    "refreshToken": ""
   }
 ]
