@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt'
 import fsPromises from 'node:fs/promises'
 import path from 'path'
 import { fileURLToPath } from "url"
+import { ROLES_LIST } from '../config/roles_list.js';
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -10,7 +11,9 @@ const dirname = path.dirname(filename)
 //Define user interface
 export interface User {
     username: string
+    roles: {[key: string]: number}
     password: string
+    refreshToken?: string
 }
 
 // In-memory data store for users (initialized from users.json)
@@ -45,7 +48,7 @@ export const handleNewUser = async (req: Request, res: Response): Promise<void> 
         const hashedPassword = await bcrypt.hash(password, 10)
 
         //create and store the new user
-        const newUser: User = { username, password: hashedPassword };
+        const newUser: User = { username, roles: {'User': ROLES_LIST.User}, password: hashedPassword };
         usersDB.setUsers([...usersDB.users, newUser])
 
         //persist to users.json file

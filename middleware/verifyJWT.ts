@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 
 export interface AuthenticatedRequest extends Request {
     user?: string
+    roles?: number[]
 }
 
 export const verifyJWT = (req: AuthenticatedRequest, res:Response, next:NextFunction): void => {
@@ -35,8 +36,9 @@ export const verifyJWT = (req: AuthenticatedRequest, res:Response, next:NextFunc
                 return
             }
 
-            const payload = decoded as { username: string }
-            req.user = payload.username
+            const payload = decoded as { UserInfo: { username: string; roles: number[] }}
+            req.user = payload.UserInfo.username
+            req.roles = payload.UserInfo.roles
             next()
     })
 }

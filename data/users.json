@@ -7,5 +7,13 @@
     "username": "Dave",
     "password": "$2b$10$czSvSjAqRft4EqFJkwfKJO1D7PyKhRdrnZUhECMer/4LYDsy8tbby",
     "refreshToken": ""
+  },
+  {
+    "username": "StandardUser",
+    "roles": {
+      "User": 2001
+    },
+    "password": "$2b$10$HTjQtmGwD6YmkpC4cQ2TWOJLANtACvpGW46Q9Tm/gd/6NdX0AMmy6",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlN0YW5kYXJkVXNlciIsImlhdCI6MTc4Njk0NDM3NCwiZXhwIjoxNzg3MDMwNzc0fQ.LgrhloS1FvaFXfCRHOVNifz_ltK1jLzf5Hs9D29qXac"
   }
 ]
